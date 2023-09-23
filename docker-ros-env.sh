@@ -58,7 +58,7 @@ function docker-ros() {
         echo "\e[32mstart container : $start_container_name \e[0m"
         echo " "
         docker start "$start_container_name" > /dev/null
-        cmd_file=$(docker exec -it mavros ls | grep docker-ros-cmd.sh)
+        cmd_file=$(docker exec -it "$start_container_name" ls | grep docker-ros-cmd.sh)
         if [[ "$cmd_file" ]];then
             docker exec -it "$start_container_name" /ros_entrypoint.sh ./docker-ros-cmd.sh "$@"
         else
